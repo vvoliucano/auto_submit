@@ -2,7 +2,7 @@
 
 # PKUAutoSubmit Github Actions 2022-7-15 更新版
 
-基于 [PKUAutoSubmit Github Actions](https://github.com/xiazhongyv/PKUAutoSubmit_online）的新版本的出入校自动登记。
+基于 [PKUAutoSubmit Github Actions](https://github.com/xiazhongyv/PKUAutoSubmit_online) 的新版本的出入校自动登记。
 
 
 ## PKUAutoSubmit Github Actions版
