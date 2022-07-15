@@ -1,6 +1,6 @@
 
 
-# PKUAutoSubmit Github Actions 2022-7-15 更新版
+# AutoSubmit Github Actions 2022-7-15 更新版
 
 ## 免责声明
 
@@ -8,7 +8,7 @@
 
 本代码提供 Github Actions 和 Selenium 自动脚本框架的案例框架。请勿用于任何违法违规行为。如果有任何问题或警告，将立刻删除该项目。
 
-## PKUAutoSubmit Github Actions版
+## AutoSubmit Github Actions版
 
 无需代码基础，无需下载文件到你的电脑，无需保持自己电脑开机，无需配置服务器和环境的
 
@@ -20,8 +20,6 @@
 
 ## 说明
 
-本项目基于[PKUAutoSubmit](https://github.com/Bruuuuuuce/PKUAutoSubmit)3.0版本开发，因此跟随使用了[Apache License 2.0](https://github.com/xiazhongyv/PKUActionSubmit/blob/master/LICENSE)证书。
-
 本项目提供了Github Actions支持，所以现在你只需要在网页端点点鼠标，无需下载任何文件到你自己的电脑或者服务器，更不需要时刻都开着电脑了。
 
 ## 如何运行自动报备
@@ -30,13 +28,13 @@
 
 1. 首先你需要有一个Github账号，如果你现在还没有登录，就赶紧点击右上角登录Github吧！推荐使用edu邮箱注册。
 
-2. 然后点击右上角的“Fork”，将该仓库分支到你自己，稍等片刻后，现在你应该在【你的ID/PKUAutoSubmit_online】这个仓库里了。（当然，如果您不是github萌新，完全可以把代码clone在任何机器运行）
+2. 然后点击右上角的“Fork”，将该仓库分支到你自己，稍等片刻后，现在你应该在【你的ID/auto_submit】这个仓库里了。（当然，如果您不是github萌新，完全可以把代码clone在任何机器运行）
 
-3. 然后在【你的ID/PKUAutoSubmit_online】下面那一栏里找到找到 <>Code ，在文件列表里里找到config.ini，点进去后右上角有一个小铅笔的符号，点击它就能编辑出入校信息了。
+3. 然后在【你的ID/auto_submit】下面那一栏里找到找到 <>Code ，在文件列表里里找到config.ini，点进去后右上角有一个小铅笔的符号，点击它就能编辑出入校信息了。
     
     按照你想要的进行编辑完成后，翻到页面最下面，点击commit changes并确认就好了。如果你跳过了第2步，记得把微信通知那里改成False.
 
-4. 然后在【你的ID/PKUAutoSubmit_online】下面那一栏里找到 Settings ，点击，在左侧找到Secrets，点击
+4. 然后在【你的ID/auto_submit】下面那一栏里找到 Settings ，点击，在左侧找到Secrets，点击
 
     点击右侧New Repository secret，然后添加 ID（大写的），然后输入你的学号
 
@@ -46,11 +44,11 @@
     
 5. 请务必注意修改.github/workflows/main.yml Line 6的corn表达式来更改为你想要的报备频率。 
 
-6. 然后在【你的ID/PKUAutoSubmit_online】下面那一栏里找到 Actions，点进去，
+6. 然后在【你的ID/auto_submit】下面那一栏里找到 Actions，点进去，
 
     可能会弹出提示框，点击“Enable...”允许脚本运行，
 
-    从左侧列表里选中PKUAutoSubmit，
+    从左侧列表里选中AutoSubmit，
 
     可能上面还是会有一条提示说是否允许脚本在fork的仓库上运行，点击“Enable...”就好，
 
@@ -79,7 +77,7 @@ Settings -> Actions -> Disabled Actions
 也可以编辑./github/workflows/main.yml, 在Line5 Line6前面加个“#”号，注释掉它们
     
 ## Q&A
-如果你有什么问题，可以在【xiazhongyv/PKUAutoSubmit_online】下面那一栏里找到 Issues，提交你的问题
+如果你有什么问题，可以在 Issues，提交你的问题
 
 Q：报错，IAAA登录失败
 
