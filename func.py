@@ -30,11 +30,11 @@ def login(driver, userName, password, retry=0):
         f'{iaaaUrl}?appID={appID}&appName={appName}&redirectUrl={redirectUrl}')
     WebDriverWait(driver, 10).until(
         EC.visibility_of_element_located((By.ID, 'logon_button')))
-    driver.find_element_by_id('user_name').send_keys(userName)
+    driver.find_element(By.ID, 'user_name').send_keys(userName)
     time.sleep(0.1)
-    driver.find_element_by_id('password').send_keys(password)
+    driver.find_element(By.ID, 'password').send_keys(password)
     time.sleep(0.1)
-    driver.find_element_by_id('logon_button').click()
+    driver.find_element(By.ID, 'logon_button').click()
     try:
         WebDriverWait(driver,
                       10).until(EC.visibility_of_element_located((By.ID, 'all')))
@@ -49,7 +49,7 @@ def go_to_simso(driver):
     driver.execute_script("$(arguments[0]).click()", button)
     WebDriverWait(driver, 10).until(
         EC.visibility_of_element_located((By.ID, 'tag_s_stuCampusExEnReq')))
-    driver.find_element_by_id('tag_s_stuCampusExEnReq').click()
+    driver.find_element(By.ID, 'tag_s_stuCampusExEnReq').click()
     time.sleep(2)
     driver.switch_to.window(driver.window_handles[-1])
     WebDriverWait(driver, 10).until(
@@ -59,17 +59,17 @@ def go_to_simso(driver):
 
 def go_to_application_new(driver):
     go_to_simso(driver)
-    driver.find_element_by_class_name('el-card__body').click()
+    driver.find_element(By.CLASS_NAME, 'el-card__body').click()
     WebDriverWait(driver, 10).until(
         EC.visibility_of_element_located((By.CLASS_NAME, 'el-select')))
     
     time.sleep(7)
-    driver.find_element_by_class_name('el-dialog__body').find_element_by_class_name('el-button--primary').click()
+    driver.find_element(By.CLASS_NAME, 'el-dialog__body').find_element(By.CLASS_NAME, 'el-button--primary').click()
 
 
 def go_to_application_out(driver):
     go_to_simso(driver)
-    driver.find_element_by_class_name('el-card__body').click()
+    driver.find_element(By.CLASS_NAME, 'el-card__body').click()
     WebDriverWait(driver, 10).until(
         EC.visibility_of_element_located((By.CLASS_NAME, 'el-select')))
 
@@ -82,29 +82,29 @@ def go_to_application_in(driver, userName, password):
         WebDriverWait(driver, 10).until(
             EC.visibility_of_element_located((By.CLASS_NAME, 'el-card__body')))
         time.sleep(0.5)
-        driver.find_element_by_class_name('el-card__body').click()
+        driver.find_element(By.CLASS_NAME, 'el-card__body').click()
         WebDriverWait(driver, 10).until(
             EC.visibility_of_element_located((By.CLASS_NAME, 'el-select')))
     except:
         print('检测到会话失效，重新登陆中...')
         login(driver, userName, password)
         go_to_simso(driver)
-        driver.find_element_by_class_name('el-card__body').click()
+        driver.find_element(By.CLASS_NAME, 'el-card__body').click()
         WebDriverWait(driver, 10).until(
             EC.visibility_of_element_located((By.CLASS_NAME, 'el-select')))
 
 # def 
 
 def select_reason_new(driver, reason):
-    driver.find_element_by_class_name('el-select').click()
+    driver.find_element(By.CLASS_NAME, 'el-select').click()
     WebDriverWait(driver, 10).until(
         EC.visibility_of_element_located(
             (By.XPATH, f'//li/span[text()="{reason}"]')))
-    driver.find_element_by_xpath(f'//li/span[text()="{reason}"]').click()
+    driver.find_element(By.XPATH, f'//li/span[text()="{reason}"]').click()
 
 
 def select_choose(driver, idx = 1, text = "燕园"):
-    driver.find_elements_by_class_name('el-select')[idx].click()
+    driver.find_elements(By.CLASS_NAME, 'el-select')[idx].click()
     # WebDriverWait(driver, 10).until(
     #     EC.visibility_of_element_located(
     #         (By.XPATH, f'//li/span[text()="{text}"]')))
@@ -112,7 +112,7 @@ def select_choose(driver, idx = 1, text = "燕园"):
     print(text)
     time.sleep(2)
 
-    all_possible = driver.find_elements_by_xpath(f'//li/span[text()="{text}"]')
+    all_possible = driver.find_elements(By.XPATH, f'//li/span[text()="{text}"]')
     
     for element in all_possible:
         try:
@@ -135,10 +135,10 @@ def select_choose(driver, idx = 1, text = "燕园"):
     #         except:
     #             continue
 
-    # # driver.find_element_by_xpath(f'//li/span[text()="{text}"]').click()
+    # # driver.find_element(By.XPATH, f'//li/span[text()="{text}"]').click()
 
 def select_in_out(driver, way):
-    driver.find_element_by_class_name('el-select').click()
+    driver.find_element(By.CLASS_NAME, 'el-select').click()
     WebDriverWait(driver, 10).until(
         EC.visibility_of_element_located(
             (By.XPATH, f'//li/span[text()="{way}"]')))
@@ -146,7 +146,7 @@ def select_in_out(driver, way):
 
 
 def select_campus_new(driver, campus):
-    driver.find_elements_by_class_name('el-select')[1].click()
+    driver.find_elements(By.CLASS_NAME, 'el-select')[1].click()
     WebDriverWait(driver, 10).until(
         EC.visibility_of_element_located(
             (By.XPATH, f'//li/span[text()="{campus}"]')))
@@ -298,7 +298,7 @@ def fill_new(driver, reason = "其他必要事项", start = "燕园", end = "校
     select_choose(driver, 3, gate)
     time.sleep(1.4)
 
-    driver.find_elements_by_class_name('el-textarea__inner')[0].send_keys(
+    driver.find_elements(By.CLASS_NAME, 'el-textarea__inner')[0].send_keys(
         reason_detail) # 出入校具体事项
     time.sleep(0.4)
 
@@ -315,12 +315,12 @@ def fill_new(driver, reason = "其他必要事项", start = "燕园", end = "校
     time.sleep(1.4)
 
 
-    driver.find_elements_by_class_name('el-textarea__inner')[1].send_keys(
+    driver.find_elements(By.CLASS_NAME, 'el-textarea__inner')[1].send_keys(
         track) # 详细轨道
     time.sleep(0.4)
 
-    driver.find_elements_by_class_name('el-input__inner')[9].clear()
-    driver.find_elements_by_class_name('el-input__inner')[9].send_keys(
+    driver.find_elements(By.CLASS_NAME, 'el-input__inner')[9].clear()
+    driver.find_elements(By.CLASS_NAME, 'el-input__inner')[9].send_keys(
         jiedao) # 街道
     time.sleep(1)
     
