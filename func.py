@@ -238,47 +238,6 @@ def submit(driver):
         '(//button/span[contains(text(),"提交")])[3]').click()
     time.sleep(0.1)
 
-
-def fill_out(driver, campus, mail_address, phone_number, reason, detail, destination, track):
-    print('开始填报出校备案')
-
-    print('选择出校/入校    ', end='')
-    select_in_out(driver, '出校')
-    print('Done')
-
-    print('选择校区    ', end='')
-    select_campus(driver, campus)
-    print('Done')
-
-    print('填写邮箱    ', end='')
-    write_mail_address(driver, mail_address)
-    print('Done')
-
-    print('填写手机号    ', end='')
-    write_phone_number(driver, phone_number)
-    print('Done')
-
-    print('填写出入校事由    ', end='')
-    write_reason(driver, reason)
-    print('Done')
-    
-    print('填写出入校事由详细描述    ', end='')
-    write_reason_detail(driver, detail)
-    print('Done')
-
-    print('选择出校目的地    ', end='')
-    select_destination(driver, destination)
-    print('Done')
-
-    print('填写出校行动轨迹    ', end='')
-    write_track(driver, track)
-    print('Done')
-
-    click_check(driver)
-    submit(driver)
-
-    print('出校备案填报完毕！')
-
 def fill_new(driver, reason = "其他必要事项", start = "燕园", end = "校外（社会面）", gate = "东南门", reason_detail = "科研", country = "中国", province = "北京市", city = "市辖区", district = "海淀区", track = "海淀路", jiedao = "海淀街道"):
     print('开始填报入校备案')
 
@@ -319,13 +278,22 @@ def fill_new(driver, reason = "其他必要事项", start = "燕园", end = "校
         track) # 详细轨道
     time.sleep(0.4)
 
+    print("轨迹：", track)
+
     driver.find_elements(By.CLASS_NAME, 'el-input__inner')[9].clear()
     driver.find_elements(By.CLASS_NAME, 'el-input__inner')[9].send_keys(
         jiedao) # 街道
     time.sleep(1)
-    
-    submit(driver)
 
+    print("街道：", jiedao)
+
+
+
+    print("提交: ")
+    try:
+        submit(driver)
+    except:
+        pass 
 
     print('Done')
 
