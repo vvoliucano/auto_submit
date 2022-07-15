@@ -2,14 +2,15 @@
 
 # PKUAutoSubmit Github Actions 2022-7-15 更新版
 
+## 免责声明
 
+本代码只供参考学习，造成的一切后果由使用者自行承担。
 
+本代码提供 Github Actions 和 Selenium 自动脚本框架的案例框架。请勿用于任何违法违规行为。如果有任何问题或警告，将立刻删除该项目。
 
 ## PKUAutoSubmit Github Actions版
 
 无需代码基础，无需下载文件到你的电脑，无需保持自己电脑开机，无需配置服务器和环境的
-
-萌新友好的自动出入校备案程序！
 
 祝大家科研和学业顺利，也祝大家身体健康！
 
@@ -25,41 +26,27 @@
 
 ## 如何运行自动报备
 
-熟悉Github的大佬们请无视掉本节内容~ 
-
-因为是在Github提供的Linux服务器上运行的，不需要在本地配环境，所以以下内容适用于任何系统的用户。
-
-以下内容有着[图文教程](https://blog.haysc.tech/pku-auto-beian-2021/)，感谢@hayschan制作该教程！
-
 0. （可选）右上角点个星星吧，不要下次一定嘛~
 
 1. 首先你需要有一个Github账号，如果你现在还没有登录，就赶紧点击右上角登录Github吧！推荐使用edu邮箱注册。
 
-2. （可选）然后如果你想要在每天自动报备后能够收到成功的提醒，那么可以在[Server酱](https://sct.ftqq.com/)用微信扫码登录，得到一个SENDKEY
+2. 然后点击右上角的“Fork”，将该仓库分支到你自己，稍等片刻后，现在你应该在【你的ID/PKUAutoSubmit_online】这个仓库里了。（当然，如果您不是github萌新，完全可以把代码clone在任何机器运行）
 
-3. 然后点击右上角的“Fork”，将该仓库分支到你自己，稍等片刻后，现在你应该在【你的ID/PKUAutoSubmit_online】这个仓库里了。（当然，如果您不是github萌新，完全可以把代码clone在任何机器运行）
-
-4. 然后在【你的ID/PKUAutoSubmit_online】下面那一栏里找到找到 <>Code ，在文件列表里里找到config.ini，点进去后右上角有一个小铅笔的符号，点击它就能编辑出入校信息了。
+3. 然后在【你的ID/PKUAutoSubmit_online】下面那一栏里找到找到 <>Code ，在文件列表里里找到config.ini，点进去后右上角有一个小铅笔的符号，点击它就能编辑出入校信息了。
     
     按照你想要的进行编辑完成后，翻到页面最下面，点击commit changes并确认就好了。如果你跳过了第2步，记得把微信通知那里改成False.
 
-5. 然后在【你的ID/PKUAutoSubmit_online】下面那一栏里找到 Settings ，点击，在左侧找到Secrets，点击
+4. 然后在【你的ID/PKUAutoSubmit_online】下面那一栏里找到 Settings ，点击，在左侧找到Secrets，点击
 
     点击右侧New Repository secret，然后添加 ID（大写的），然后输入你的学号
 
     再点击右侧New Repository secret，然后添加 PASSWORD（大写的），然后输入你的密码。【如果你的密码里有特殊字符如()/\, 请用双引号将你的密码包裹起来，即在value一栏输入："yourpassword"】
 
-    再点击右侧New Repository secret，然后添加 MAIL_ADDRESS（大写的），然后输入你的电子邮箱地址
-
-    再点击右侧New Repository secret，然后添加 PHONE_NUMBER（大写的），然后输入你的手机号码
-
-    再点击右侧New Repository secret，然后添加 SENDKEY（大写的），然后输入你的SENDKEY（如果你不需要微信通知，就随便写点啥都行）
-
     <font size=5>*secret是github的保密字段，在这里填写的内容，在填写后没人能够看到它是什么，包括你自己，你只能修改它。*
     
-6. 当前我的仓库的默认值为周三四五中午12点，如果你想修改这个频率，请务必注意修改.github/workflows/main.yml Line 6的corn表达式来更改为你想要的报备频率。 
+5. 请务必注意修改.github/workflows/main.yml Line 6的corn表达式来更改为你想要的报备频率。 
 
-7. 然后在【你的ID/PKUAutoSubmit_online】下面那一栏里找到 Actions，点进去，
+6. 然后在【你的ID/PKUAutoSubmit_online】下面那一栏里找到 Actions，点进去，
 
     可能会弹出提示框，点击“Enable...”允许脚本运行，
 
@@ -69,7 +56,7 @@
 
     这个时候，脚本应该已经可以按照你设定的频率自动运行了，但是推荐手动测试一下，手动测试点击右侧的“Run workflow” - “Run workflow”就可以手动运行一次了。
     
-8. （附加）请手动用浏览器登录一次门户，确保不会有人脸识别授权页面（点击接受或拒绝后便不会再显示该页面）以及微信二维码页面（扫码关注北大信息门户公众号后便不会再弹出该窗口），这两个页面都会干扰程序的正常运行。
+7. （附加）请手动用浏览器登录一次门户，确保不会有人脸识别授权页面（点击接受或拒绝后便不会再显示该页面）以及微信二维码页面（扫码关注北大信息门户公众号后便不会再弹出该窗口），这两个页面都会干扰程序的正常运行。
     
 
 
