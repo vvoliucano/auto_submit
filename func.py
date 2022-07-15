@@ -10,6 +10,7 @@ import os
 import time
 import warnings
 import json
+import random
 warnings.filterwarnings('ignore')
 
 
@@ -55,6 +56,17 @@ def go_to_simso(driver):
         EC.visibility_of_element_located((By.CLASS_NAME, 'el-card__body')))
 
 
+
+def go_to_application_new(driver):
+    go_to_simso(driver)
+    driver.find_element_by_class_name('el-card__body').click()
+    WebDriverWait(driver, 10).until(
+        EC.visibility_of_element_located((By.CLASS_NAME, 'el-select')))
+    
+    time.sleep(7)
+    driver.find_element_by_class_name('el-dialog__body').find_element_by_class_name('el-button--primary').click()
+
+
 def go_to_application_out(driver):
     go_to_simso(driver)
     driver.find_element_by_class_name('el-card__body').click()
@@ -81,6 +93,49 @@ def go_to_application_in(driver, userName, password):
         WebDriverWait(driver, 10).until(
             EC.visibility_of_element_located((By.CLASS_NAME, 'el-select')))
 
+# def 
+
+def select_reason_new(driver, reason):
+    driver.find_element_by_class_name('el-select').click()
+    WebDriverWait(driver, 10).until(
+        EC.visibility_of_element_located(
+            (By.XPATH, f'//li/span[text()="{reason}"]')))
+    driver.find_element_by_xpath(f'//li/span[text()="{reason}"]').click()
+
+
+def select_choose(driver, idx = 1, text = "燕园"):
+    driver.find_elements_by_class_name('el-select')[idx].click()
+    # WebDriverWait(driver, 10).until(
+    #     EC.visibility_of_element_located(
+    #         (By.XPATH, f'//li/span[text()="{text}"]')))
+    
+    print(text)
+    time.sleep(2)
+
+    all_possible = driver.find_elements_by_xpath(f'//li/span[text()="{text}"]')
+    
+    for element in all_possible:
+        try:
+            element.click()
+        except:
+            continue
+
+    
+    # all_dropdown = driver.find_elements(By.TAG_NAME, "li")
+
+    # print(len(all_dropdown))
+
+    # for i, element in enumerate(all_dropdown):
+    #     print(i, element.get_attribute("innerText"))
+    
+    # for i, element in enumerate(all_dropdown):
+    #     if (element.get_attribute("innerText") == text):
+    #         try:
+    #             element.click()
+    #         except:
+    #             continue
+
+    # # driver.find_element_by_xpath(f'//li/span[text()="{text}"]').click()
 
 def select_in_out(driver, way):
     driver.find_element_by_class_name('el-select').click()
@@ -89,6 +144,15 @@ def select_in_out(driver, way):
             (By.XPATH, f'//li/span[text()="{way}"]')))
     driver.find_element_by_xpath(f'//li/span[text()="{way}"]').click()
 
+
+def select_campus_new(driver, campus):
+    driver.find_elements_by_class_name('el-select')[1].click()
+    WebDriverWait(driver, 10).until(
+        EC.visibility_of_element_located(
+            (By.XPATH, f'//li/span[text()="{campus}"]')))
+    driver.find_element_by_xpath(f'//li/span[text()="{campus}"]').click()
+
+    
 
 def select_campus(driver, campus):
     driver.find_elements_by_class_name('el-select')[1].click()
@@ -215,51 +279,53 @@ def fill_out(driver, campus, mail_address, phone_number, reason, detail, destina
 
     print('出校备案填报完毕！')
 
-
-def fill_in(driver, campus, mail_address, phone_number, reason, detail, habitation, district, street):
+def fill_new(driver, reason = "其他必要事项", start = "燕园", end = "校外（社会面）", gate = "东南门", reason_detail = "科研", country = "中国", province = "北京市", city = "市辖区", district = "海淀区", track = "海淀路", jiedao = "海淀街道"):
     print('开始填报入校备案')
 
-    print('选择出校/入校    ', end='')
-    select_in_out(driver, '入校')
+    print('选择原因   ', end='')
+    select_reason_new(driver, reason)
     print('Done')
+    time.sleep(0.3)
 
-    print('选择校区    ', end='')
-    select_campus(driver, campus)
-    print('Done')
-
-    print('填写邮箱    ', end='')
-    write_mail_address(driver, mail_address)
-    print('Done')
-
-    print('填写手机号    ', end='')
-    write_phone_number(driver, phone_number)
-    print('Done')
-
-    print('填写出入校事由    ', end='')
-    write_reason(driver, reason)
-    print('Done')
+    print('选择起点   ', end='')
+    select_choose(driver, 1, start)
+    # select_campus_new(driver, "万柳园区")
+    time.sleep(0.3)
     
-    print('填写出入校事由详细描述    ', end='')
-    write_reason_detail(driver, detail)
+    select_choose(driver, 2, end)
+    time.sleep(0.3)
+
+    select_choose(driver, 3, gate)
+    time.sleep(1.4)
+
+    driver.find_elements_by_class_name('el-textarea__inner')[0].send_keys(
+        reason_detail) # 出入校具体事项
+    time.sleep(0.4)
+
+    select_choose(driver, 4, country)
+    time.sleep(1.4)
+
+    select_choose(driver, 5, province)
+    time.sleep(1.4)
+
+    select_choose(driver, 6, city)
+    time.sleep(1.4)
+
+    select_choose(driver, 7, district)
+    time.sleep(1.4)
+
+
+    driver.find_elements_by_class_name('el-textarea__inner')[1].send_keys(
+        track) # 详细轨道
+    time.sleep(0.4)
+
+    driver.find_elements_by_class_name('el-input__inner')[9].clear()
+    driver.find_elements_by_class_name('el-input__inner')[9].send_keys(
+        jiedao) # 街道
+    time.sleep(1)
+
+
     print('Done')
-
-    if habitation != '北京':
-        raise Exception('暂不支持京外入校备案，请手动填写')
-
-    print('选择居住地所在区    ', end='')
-    select_district(driver, district)
-    print('Done')
-
-    print('填写居住地所在街道    ', end='')
-    write_street(driver, street)
-    print('Done')
-
-    click_inPeking(driver)
-    click_check(driver)
-    submit(driver)
-
-    print('入校备案填报完毕！')
-
 
 def screen_capture(driver, path):
     driver.back()
@@ -289,26 +355,24 @@ def wechat_notification(userName, sckey):
     #     print(str(response['errno']) + ' error: ' + response['errmsg'])
 
 
-def run(driver, userName, password, campus, mail_address, phone_number, reason, detail, destination, track,
-        habitation, district, street, capture, path, wechat, sckey):
+def run(driver, userName, password, reason, start, end, gate, reason_detail, country, province, city, district, jiedao, track):
+
+
     login(driver, userName, password)
     print('=================================')
 
-    go_to_application_out(driver)
-    fill_out(driver, campus, mail_address, phone_number, reason, detail, destination, track)
-    print('=================================')
+    go_to_application_new(driver)
 
-    go_to_application_in(driver, userName, password)
-    fill_in(driver, campus, mail_address, phone_number, reason, detail, habitation, district, street)
-    print('=================================')
+    fill_new(driver, reason, start, end, gate, reason_detail, country, province, city, district, track, jiedao)
 
-    if capture:
-        screen_capture(driver, path)
-        print('=================================')
+    # if capture:
+    #     screen_capture(driver, path)
+    #     print('=================================')
 
-    if wechat:
-        wechat_notification(userName, sckey)
-        print('=================================')
+    # if wechat:
+    #     # wechat_notification(userName, sckey)
+    #     print('发送微信通知')
+    #     print('=================================')
 
     print('报备成功！\n')
 
