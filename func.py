@@ -323,6 +323,8 @@ def fill_new(driver, reason = "其他必要事项", start = "燕园", end = "校
     driver.find_elements_by_class_name('el-input__inner')[9].send_keys(
         jiedao) # 街道
     time.sleep(1)
+    
+    submit(driver)
 
 
     print('Done')
