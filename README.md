@@ -2,7 +2,7 @@
 
 # PKUAutoSubmit Github Actions 2022-7-15 更新版
 
-基于 [PKUAutoSubmit Github Actions](https://github.com/xiazhongyv/PKUAutoSubmit_online) 的新版本的出入校自动登记。
+
 
 
 ## PKUAutoSubmit Github Actions版
@@ -131,5 +131,5 @@ A：找一找页面上有没有关于是否允许脚本在fork的仓库上运行
 ## 免责声明
 本代码只供参考学习，造成的一切后果由使用者自行承担。
 
-本品的开发初衷是拯救需要每天出入校的科研党，利人利己，欢迎大家扩散。如果有任何问题或警告，我会立即删除该项目。
+本代码提供 Github Actions 和 Selenium 自动脚本框架的案例框架。请勿用于任何违法违规行为。如果有任何问题或警告，将立刻删除该项目。
 
