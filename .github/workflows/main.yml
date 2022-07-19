@@ -2,13 +2,13 @@ name: PKUAutoSubmit
 
 on:
   schedule:
-    - cron: '58 23 * * 1'
-    - cron: '43 23 * * 2'
-    - cron: '33 23 * * 3'
-    - cron: '43 23 * * 4'
-    - cron: '46 23 * * 5'
-    - cron: '34 23 * * 6'
-    - cron: '58 23 * * 0'
+    - cron: '58 0 * * 1'
+    - cron: '43 0 * * 2'
+    - cron: '33 0 * * 3'
+    - cron: '43 0 * * 4'
+    - cron: '46 1 * * 5'
+    - cron: '34 2 * * 6'
+    - cron: '58 1 * * 0'
     
   workflow_dispatch:
 
